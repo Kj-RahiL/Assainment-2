@@ -7,8 +7,12 @@ const app: Application = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World!');
-});
+app.use('/api/products', )
+
+const getAController = (req: Request, res: Response) => {
+    const a = 'Assignment -2 is running on the port';
+    res.send(a);
+  };
+  app.get('/', getAController);
 
 export default app;
