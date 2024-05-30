@@ -26,20 +26,18 @@ const getAllOrder = async (req: Request, res: Response) => {
       const email: string = req.query?.email as string;
       const result = await orderService.getOrderByEmailFromDB(email);
 
-      if(!req.query.email){
+      if (result.length === 0 ) {
         res.status(500).json({
-            success: false,
-            message: `Sorry! No found data!! Your provided email : ${email} is not correct! Please provided valid email`,
-          });
-
-      }else{
+          success: false,
+          message: `Sorry! No found data!! Your provided email : ${email} is not correct! Please provided valid email`,
+        });
+      } else {
         res.status(200).json({
-            success: true,
-            message: `Orders fetched successfully for user email ${email}!`,
-            data: result,
-          });
+          success: true,
+          message: `Orders fetched successfully for user email ${email}!`,
+          data: result,
+        });
       }
-      
     } else {
       const result = await orderService.getAllOrderFromDB();
       res.status(201).json({
@@ -59,5 +57,5 @@ const getAllOrder = async (req: Request, res: Response) => {
 
 export const orderController = {
   createOrder,
-  getAllOrder
+  getAllOrder,
 };
