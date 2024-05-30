@@ -7,7 +7,19 @@ const createOrderIntoDB = async(orderData: TOrder) => {
     return result
 }
 
+const getAllOrderFromDB = async() => {
+    const result = await Order.find()
+    return result
+}
+
+const getOrderByEmailFromDB = async(email: string) => {
+    const result = await Order.find({email})
+    return result;
+}
+
 export const orderService = {
     createOrderIntoDB,
-    
+    getAllOrderFromDB,
+    getOrderByEmailFromDB
+
 }
