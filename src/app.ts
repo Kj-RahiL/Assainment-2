@@ -19,4 +19,13 @@ const getAController = (req: Request, res: Response) => {
   };
   app.get('/', getAController);
 
+//  route handler
+app.all('*', (req: Request, res: Response) => {
+    res.status(400).json({
+      success: false,
+      message: 'Route not found',
+    })
+  })
+  
+
 export default app;

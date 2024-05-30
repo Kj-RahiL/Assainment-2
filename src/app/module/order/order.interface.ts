@@ -1,6 +1,6 @@
 import { Document } from "mongoose"
 
-interface TOrder extends Document {
+type TOrder = {
     email: string,
     productId : string,
     price: number,
