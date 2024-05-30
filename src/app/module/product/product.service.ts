@@ -16,9 +16,12 @@ const getSingleProductsFromDB = async (_id: string) => {
   return result;
 };
 
-const updateProductIntoDB = async (_id: string, updateData: any) => {
-  const result = await Product.updateOne({ _id }, [{ $set: updateData }]);
-  console.log(result);
+const updateProductIntoDB = async (_id: string, updateData: TProduct) => {
+  const result = await Product.findByIdAndUpdate(
+    { _id },
+    [{ $set: updateData }],
+    {new: true },
+  );
   return result;
 };
 
@@ -29,7 +32,7 @@ const deleteProductIntoDB = async (_id: string) => {
 };
 
 const searchProductIntoDB = async (searchTerm: string) => {
-    const regex = new RegExp(searchTerm, 'i')
+  const regex = new RegExp(searchTerm, 'i');
   const result = await Product.find({
     $or: [
       { name: regex },
@@ -37,7 +40,7 @@ const searchProductIntoDB = async (searchTerm: string) => {
       { category: regex },
       { tags: regex },
     ],
-  }).lean();
+  });
   return result;
 };
 
