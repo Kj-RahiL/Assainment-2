@@ -33,11 +33,20 @@ const deleteProductIntoDB = async(_id: string)=>{
     return result;
 }
 
+
+const searchProductIntoDB = async(searchTerm : string)=>{
+
+    const result = await Product.deleteOne()
+    console.log(result)
+    return result;
+}
+
 export const productServices = {
     createProductIntoDB,
     getAllProductsFromDB,
     getSingleProductsFromDB,
     updateProductIntoDB,
-    deleteProductIntoDB
+    deleteProductIntoDB,
+    searchProductIntoDB
 
 }
