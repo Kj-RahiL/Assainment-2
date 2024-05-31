@@ -26,6 +26,7 @@ const createOrder = async (req: Request, res: Response) => {
 
 const getAllOrder = async (req: Request, res: Response) => {
   try {
+    // get data only email 
     if (req.query.email) {
       const email: string = req.query?.email as string;
       const result = await orderService.getOrderByEmailFromDB(email);
@@ -43,6 +44,7 @@ const getAllOrder = async (req: Request, res: Response) => {
         });
       }
     } else {
+      // get all data
       const result = await orderService.getAllOrderFromDB();
       res.status(201).json({
         success: true,

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { productServices } from './product.service';
 import ProductValidationSchema from './product.zod.validation';
 
+// create product
 const createProduct = async (req: Request, res: Response) => {
   try {
       const { product: productData } = req.body;
@@ -24,12 +25,13 @@ const createProduct = async (req: Request, res: Response) => {
   }
 };
 
+// get all product
 const getAllProduct = async (req: Request, res: Response) => {
   try {
     const result = await productServices.getAllProductsFromDB();
     res.status(200).json({
       success: true,
-      message: 'Product is created successfully',
+      message:  "Products fetched successfully!",
       data: result,
     });
   } catch (error: any) {
@@ -40,6 +42,8 @@ const getAllProduct = async (req: Request, res: Response) => {
     });
   }
 };
+
+// get single product by id
 const getSingleProduct = async (req: Request, res: Response) => {
   try {
       const { productId } = req.params;
@@ -58,6 +62,7 @@ const getSingleProduct = async (req: Request, res: Response) => {
   }
 };
 
+// update product
 const updateProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
@@ -81,6 +86,7 @@ const updateProduct = async (req: Request, res: Response) => {
   }
 };
 
+// delete product
 const deleteProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
@@ -100,6 +106,7 @@ const deleteProduct = async (req: Request, res: Response) => {
   }
 };
 
+// search product
 const searchProduct = async (req: Request, res: Response) => {
   try {
     const searchTerm = req.query.searchTerm as string;
