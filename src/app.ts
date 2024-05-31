@@ -9,23 +9,22 @@ const app: Application = express();
 app.use(express.json());
 app.use(cors());
 
-app.use('/api/products', productRoutes)
+app.use('/api/products', productRoutes);
 
-app.use('/api/orders', orderRoutes)
+app.use('/api/orders', orderRoutes);
 
 const getAController = (req: Request, res: Response) => {
-    const a = 'Assignment -2 is running on the port';
-    res.send(a);
-  };
-  app.get('/', getAController);
+  const a = 'Assignment -2 is running on the port';
+  res.send(a);
+};
+app.get('/', getAController);
 
 //  route handler
 app.all('*', (req: Request, res: Response) => {
-    res.status(400).json({
-      success: false,
-      message: 'Route not found',
-    })
-  })
-  
+  res.status(400).json({
+    success: false,
+    message: 'Route not found',
+  });
+});
 
 export default app;

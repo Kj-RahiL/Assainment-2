@@ -20,7 +20,7 @@ const updateProductIntoDB = async (_id: string, updateData: TProduct) => {
   const result = await Product.findByIdAndUpdate(
     { _id },
     [{ $set: updateData }],
-    {new: true },
+    { new: true },
   );
   return result;
 };

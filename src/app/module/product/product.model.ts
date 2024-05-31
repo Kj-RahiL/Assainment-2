@@ -22,5 +22,3 @@ const ProductSchema = new Schema<TProduct>({
 });
 
 export const Product = model<TProduct>('Product', ProductSchema);
-
-

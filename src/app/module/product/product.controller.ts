@@ -5,11 +5,11 @@ import ProductValidationSchema from './product.zod.validation';
 // create product
 const createProduct = async (req: Request, res: Response) => {
   try {
-      const { product: productData } = req.body;
-    
-      // zod validation
-      const zodParseData = ProductValidationSchema.parse(productData)
-    
+    const { product: productData } = req.body;
+
+    // zod validation
+    const zodParseData = ProductValidationSchema.parse(productData);
+
     const result = await productServices.createProductIntoDB(zodParseData);
     res.status(200).json({
       success: true,
@@ -31,7 +31,7 @@ const getAllProduct = async (req: Request, res: Response) => {
     const result = await productServices.getAllProductsFromDB();
     res.status(200).json({
       success: true,
-      message:  "Products fetched successfully!",
+      message: 'Products fetched successfully!',
       data: result,
     });
   } catch (error: any) {
@@ -46,13 +46,13 @@ const getAllProduct = async (req: Request, res: Response) => {
 // get single product by id
 const getSingleProduct = async (req: Request, res: Response) => {
   try {
-      const { productId } = req.params;
-      const result = await productServices.getSingleProductsFromDB(productId);
-      res.status(200).json({
-        success: true,
-        message: 'Products fetched successfully!',
-        data: result,
-      });
+    const { productId } = req.params;
+    const result = await productServices.getSingleProductsFromDB(productId);
+    res.status(200).json({
+      success: true,
+      message: 'Products fetched successfully!',
+      data: result,
+    });
   } catch (error: any) {
     res.status(500).json({
       success: false,
