@@ -1,6 +1,6 @@
 # Product Management API
 
-This project is a simple Order Management API built with Node.js, Express, and MongoDB. It provides endpoints to create and retrieve orders.
+This project is a simple Order Management API built with TypeScript, Node.js, Express, and Mongoose. Using eslint and prettier for clean code and validation to zod. It provides endpoints to create, retrieve, delete, put products and orders.
 
 ## Prerequisites
 
@@ -36,7 +36,7 @@ get all products
 - Endpoint: /api/products
 
 get all orders
-Endpoint: /api/orders
+- Endpoint: /api/orders
 
 get single product by id
 - Endpoint: /api/products/66582ed1600d49cfa61e9e34
