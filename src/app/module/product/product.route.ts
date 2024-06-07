@@ -4,10 +4,10 @@ import { ProductController } from './product.controller';
 const router = express.Router();
 
 // search route
-router.get('/', ProductController.searchProduct);
+// router.get('/', ProductController.searchProduct);
 
 // create route
-router.post('/create-product', ProductController.createProduct);
+router.post('/', ProductController.createProduct);
 
 // get all data
 router.get('/', ProductController.getAllProduct);

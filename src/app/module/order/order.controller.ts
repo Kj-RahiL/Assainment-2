@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express';
 import { orderService } from './order.service';
 import OrderValidationSchema from './order.zod.validation';

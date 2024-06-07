@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express';
 import { productServices } from './product.service';
 import ProductValidationSchema from './product.zod.validation';
@@ -9,8 +10,8 @@ const createProduct = async (req: Request, res: Response) => {
 
     // zod validation
     const zodParseData = ProductValidationSchema.parse(productData);
-
     const result = await productServices.createProductIntoDB(zodParseData);
+
     res.status(200).json({
       success: true,
       message: 'Product is created successfully',
@@ -28,12 +29,30 @@ const createProduct = async (req: Request, res: Response) => {
 // get all product
 const getAllProduct = async (req: Request, res: Response) => {
   try {
-    const result = await productServices.getAllProductsFromDB();
-    res.status(200).json({
-      success: true,
-      message: 'Products fetched successfully!',
-      data: result,
-    });
+    if (req?.query?.searchTerm) {
+      const searchTerm = req.query.searchTerm as string;
+      const result = await productServices.searchProductIntoDB(searchTerm);
+
+      if (result.length === 0) {
+        res.status(500).json({
+          success: false,
+          message: `Sorry! No found data!! Your provided email : ${searchTerm} is not here data`,
+        });
+      } else {
+        res.status(200).json({
+          success: true,
+          message: `Products matching search term '${searchTerm}' fetched successfully!`,
+          data: result,
+        });
+      }
+    } else {
+      const result = await productServices.getAllProductsFromDB();
+      res.status(200).json({
+        success: true,
+        message: 'Products fetched successfully!',
+        data: result,
+      });
+    }
   } catch (error: any) {
     res.status(500).json({
       success: false,
@@ -113,7 +132,7 @@ const searchProduct = async (req: Request, res: Response) => {
     const result = await productServices.searchProductIntoDB(searchTerm);
     res.status(200).json({
       success: true,
-      message: `Products matching search term ${searchTerm}fetched successfully!`,
+      message: `Products matching search term '${searchTerm}' fetched successfully!`,
       data: result,
     });
   } catch (error: any) {
