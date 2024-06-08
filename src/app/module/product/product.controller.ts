@@ -6,10 +6,9 @@ import ProductValidationSchema from './product.zod.validation';
 // create product
 const createProduct = async (req: Request, res: Response) => {
   try {
-    const { product: productData } = req.body;
 
     // zod validation
-    const zodParseData = ProductValidationSchema.parse(productData);
+    const zodParseData = ProductValidationSchema.parse(req.body);
     const result = await productServices.createProductIntoDB(zodParseData);
 
     res.status(200).json({
